@@ -17,7 +17,7 @@ mongoose.connect(url,{
   //useMongoClient: true
 });
 
-require('./config/passport')(passport);
+//require('./config/passport')(passport);
 
 //Settings
 app.set('port', process.env.port || 3000);
@@ -28,19 +28,19 @@ app.set('view engine', 'ejs');
 //Middleware
 app.use(morgan('dev'));
 app.use(cookieparser());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyparser.urlencoded({extended:false}));
 app.use(session({
   secret:'topicostelematica',
   resave: false,
   saveUnitialized:false
 }));
-app.use(passport.initialize);
+app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
 
 //routes
-require('./app/routes')(app,passport);
+require('./app/routes/routes')(app,passport);
 
 //static files
 app.use(express.static(path.join(__dirname,'public')));
