@@ -38,7 +38,6 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-
 //routes
 require('./app/routes/routes')(app,passport);
 

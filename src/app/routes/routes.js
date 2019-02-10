@@ -1,5 +1,10 @@
+
+const mongoose = require('mongoose');
+mongoose.Promise = global.Promise;
+const coords = require('../models/localizacion');
+
 module.exports = (app,passport)=>{
-  app.get('/', (req,res)=>{
+  app.get('/',(req,res)=>{
     res.render('index');
   });
 
@@ -39,8 +44,12 @@ module.exports = (app,passport)=>{
     res.redirect('/');
   });
 
-  app.get('/map',(req,res)=>{
+  app.get('/map',isLoggedin,(req,res)=>{
     res.render('map');
+  });
+
+  app.post('/map',isLoggedin,(req,res)=>{
+
   });
 
   function isLoggedin(req,res,next){

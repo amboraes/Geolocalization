@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 
-const userSchema = new mongoose.Schema({
-  longitud: Double,
-  latitud: Double
+const mapSchema = new mongoose.Schema({
+  name:String,
+  longitud: Number,
+  latitud: Number
 });
 
-module.exports = mongoose.model('User', userSchema);
+module.exports = mongoose.model('map', mapSchema);
