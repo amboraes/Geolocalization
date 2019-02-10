@@ -39,6 +39,10 @@ module.exports = (app,passport)=>{
     res.redirect('/');
   });
 
+  app.get('/map',(req,res)=>{
+    res.render('map');
+  });
+
   function isLoggedin(req,res,next){
     if(req.isAuthenticated()){
       return next();

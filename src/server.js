@@ -44,6 +44,7 @@ require('./app/routes/routes')(app,passport);
 
 //static files
 app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'app')));
 
 app.listen(app.get('port'), function(err, response) {
   console.log("Server running on port ", app.get('port'));
