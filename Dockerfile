@@ -6,7 +6,7 @@ ENV PORT $PORT
 WORKDIR /usr/src/app
 COPY . ./
 
-RUN npm install --test
+RUN npm install
 
 EXPOSE 3000
 CMD npm start
