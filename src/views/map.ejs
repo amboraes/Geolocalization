@@ -18,6 +18,10 @@
       margin-right: 100px;
       margin-left: 300px;
     }
+    #submiti{
+      visibility: hidden;
+
+    }
 
     /* Optional: Makes the sample page fill the window. */
     html,
@@ -54,7 +58,7 @@
     // prompted by your browser. If you see the error "The Geolocation service
     // failed.", it means you probably did not give permission for the browser to
     // locate you.
-    var map, infoWindow;
+    var map, infoWindow,cordenadas=new Array();
 
     function getpos(position) {
       var pos = {
@@ -72,14 +76,23 @@
         },
         zoom: 18
       });
+      function submitcoords(lat,lng){
+
+      }
       infoWindow = new google.maps.InfoWindow;
 
       // Try HTML5 geolocation.
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
           var pos = getpos(position);
+          cordenadas.push(pos);
+          //console.log(cordenadas[cordenadas.length-1].lat+" , "+cordenadas[cordenadas.length-1].lng);
           document.getElementById("longitud").innerHTML = pos.lng;
           document.getElementById("latitud").innerHTML = pos.lat;
+          document.getElementById("lati").value = pos.lat;
+          document.getElementById("long").value = pos.lng;
+          document.getElementById("submiti").submit();
+          //console.log("Latitud"+document.getElementById("lati").value)
           infoWindow.setPosition(pos);
           map.setCenter(pos);
           var image = 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png';
@@ -100,7 +113,6 @@
       }
 
     }
-
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       infoWindow.setPosition(pos);
       infoWindow.setContent(browserHasGeolocation ?
@@ -114,6 +126,18 @@
   <label for="longitud" id="longitud"></label>
   <label for="latitud" id="latitud"></label>
   <button type="button" name="button" onclick="clearInterval(myvar)">Stop get location</button>
+  <form action="/map" method="post"  id="submiti">
+    <div class="form-group">
+      <label for="latitud">Latitud</label>
+      <input type="latitud" name="latitud" class="form-control" id="lati">
+    </div>
+
+    <div class="form-group">
+      <label for="longitud"></label>
+      <input type="longitud" name="longitud" class=" form-control" id="long">
+    </div>
+    <input type="submit" class="btn btn-dark">
+  </form>
 </body>
 
 </html>

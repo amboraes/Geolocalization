@@ -1,7 +1,7 @@
 
 const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
-const coords = require('../models/localizacion');
+const Cords = require('../models/localizacion');
 
 module.exports = (app,passport)=>{
   app.get('/',(req,res)=>{
@@ -49,7 +49,17 @@ module.exports = (app,passport)=>{
   });
 
   app.post('/map',isLoggedin,(req,res)=>{
-
+    //console.log(req.body.latitud);
+    var newcord = new Cords();
+    newcord.name="1";
+    newcord.longitud = req.body.longitud;
+    newcord.latitud = req.body.latitud;
+    newcord.save(function(err){
+      if (err){
+        throw err;
+      }
+      //return done(null,newcord);
+    });
   });
 
   function isLoggedin(req,res,next){
